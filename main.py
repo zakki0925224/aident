@@ -11,6 +11,11 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL")
 CUSTOM_INSTRUCTIONS = os.getenv("CUSTOM_INSTRUCTIONS")
 
+# check if required environment variables are set
+if not GOOGLE_API_KEY or not GEMINI_MODEL or not CUSTOM_INSTRUCTIONS:
+    st.error("Please set the GOOGLE_API_KEY, GEMINI_MODEL, and CUSTOM_INSTRUCTIONS environment variables.")
+    st.stop()
+
 # initialize genai client
 genai_client = genai.Client(api_key=GOOGLE_API_KEY)
 search_tool = types.Tool(google_search=types.GoogleSearch())
